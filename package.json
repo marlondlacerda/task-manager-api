@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/main/server.ts",
+    "prisma:generate": "prisma generate --schema=src/infra/database/mysql/schema.prisma",
+    "prisma:migrate": "prisma migrate dev --schema=src/infra/database/mysql/schema.prisma",
+    "prisma:reset": "prisma migrate reset --force --schema=src/infra/database/mysql/schema.prisma"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +16,7 @@
     "@types/node": "^24.0.3",
     "prisma": "^6.10.1",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
@@ -22,6 +27,7 @@
     "bcryptjs": "^3.0.2",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.25.67"
   }
 }
