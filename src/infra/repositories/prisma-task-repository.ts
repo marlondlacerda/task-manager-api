@@ -13,4 +13,23 @@ export class PrismaTaskRepository implements TaskRepository {
       },
     });
   }
+
+  async findAllByUser(userId: string): Promise<Task[]> {
+    return this.prisma.task.findMany({
+      where: {
+        userId,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
+  async findById(id: string): Promise<Task | null> {
+    return this.prisma.task.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
 }

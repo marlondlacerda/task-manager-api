@@ -7,8 +7,8 @@ export const configureTaskRoutes = (router: Router, taskController: TaskControll
   router.use(authMiddleware);
 
   router.post('/', validate(taskSchema), asyncHandler(taskController.create));
-  // router.get('/', asyncHandler(taskController.list));
-  // router.get('/:id', asyncHandler(taskController.getById));
+  router.get('/', asyncHandler(taskController.findAllByUser));
+  router.get('/:id', asyncHandler(taskController.findById));
   // router.put('/:id', asyncHandler(taskController.update));
   // router.delete('/:id', asyncHandler(taskController.delete));
 
