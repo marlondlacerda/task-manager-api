@@ -9,9 +9,6 @@ export const setupRoutes = () => {
 
   // Configure global middlewares
   configureHealthcheck(router);
-  router.get('/', (_req: Request, res: Response) => {
-    res.redirect('/readiness');
-  });
 
   // Configure authentication routes
   configureAuthRoutes(router, makeAuthController());

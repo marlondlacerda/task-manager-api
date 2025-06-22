@@ -6,6 +6,7 @@ import { setupRoutes } from './routes/setupRoutes';
 import { errorMiddleware } from './middleware/error-middleware';
 import { logger } from '@shared/logging';
 import { loggingMiddleware } from './middleware/logging-middleware';
+import { setupSwagger } from '@presentation/docs/swagger/config';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(
 );
 
 app.use(loggingMiddleware);
+setupSwagger(app);
 app.use(setupRoutes());
 app.use(errorMiddleware);
 

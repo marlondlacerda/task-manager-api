@@ -31,7 +31,7 @@ const formatDuration = (seconds: number) => {
 
 export const configureHealthcheck = (router: Router): Router => {
   router.get(
-    '/readiness',
+    ['/', '/readiness'],
     asyncHandler(async (req: Request, res: Response) => {
       const startTime = performance.now();
 

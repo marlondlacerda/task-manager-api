@@ -1,0 +1,23 @@
+{
+  "entryFile": "src/main/server.ts",
+  "controllerPathGlobs": [
+    "src/presentation/controllers/**/*.ts",
+    "src/presentation/docs/controllers/**/*.ts"
+  ],
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "spec": {
+    "outputDirectory": "build",
+    "specVersion": 3,
+    "basePath": "/",
+    "securityDefinitions": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "routes": {
+    "routesDir": "build"
+  }
+}
