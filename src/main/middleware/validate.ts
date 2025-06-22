@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { AnyZodObject, ZodError } from 'zod';
 
-export const validate = (schema: AnyZodObject): RequestHandler => {
+const validate = (schema: AnyZodObject): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction) => {
     schema
       .parseAsync({
@@ -34,3 +34,5 @@ export const validate = (schema: AnyZodObject): RequestHandler => {
       });
   };
 };
+
+export default validate;

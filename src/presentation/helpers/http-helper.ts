@@ -1,6 +1,6 @@
 import { Response } from 'express';
 
-export class HttpHelper {
+class HttpHelper {
   static success(res: Response, data: any, statusCode: number = 200) {
     return res.status(statusCode).json({
       success: true,
@@ -28,3 +28,5 @@ export class HttpHelper {
     });
   }
 }
+
+export default HttpHelper;

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/main/server.ts",
+    "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/main/server.ts",
     "prisma:generate": "prisma generate --schema=src/infra/database/mysql/schema.prisma",
     "prisma:migrate": "prisma migrate dev --schema=src/infra/database/mysql/schema.prisma",
     "prisma:reset": "prisma migrate reset --force --schema=src/infra/database/mysql/schema.prisma",
@@ -17,6 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@types/module-alias": "^2.0.4",
     "@types/node": "^24.0.3",
     "@typescript-eslint/eslint-plugin": "^8.34.1",
     "@typescript-eslint/parser": "^8.34.1",
@@ -27,6 +28,7 @@
     "prisma": "^6.10.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
@@ -38,7 +40,16 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "winston": "^3.17.0",
     "zod": "^3.25.67"
+  },
+  "_moduleAliases": {
+    "@src": "dist",
+    "@domain": "dist/domain",
+    "@infra": "dist/infra",
+    "@main": "dist/main",
+    "@presentation": "dist/presentation",
+    "@shared": "dist/shared"
   }
 }

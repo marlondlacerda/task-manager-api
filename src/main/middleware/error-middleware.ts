@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { ErrorHandler } from '../../shared/errors/error-handler';
-import { HttpHelper } from '../../presentation/helpers/http-helper';
+import { ErrorHandler } from '@shared/errors';
+import { HttpHelper } from '@presentation/helpers';
 
 export const errorMiddleware = (
   err: unknown,
