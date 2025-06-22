@@ -8,7 +8,7 @@ const compat = new FlatCompat();
 export default [
   js.configs.recommended,
   {
-    ignores: ['dist/**', 'node_modules/**'],
+    ignores: ['dist/**', 'build/**', 'node_modules/**'],
   },
   {
     files: ['**/*.ts'],
