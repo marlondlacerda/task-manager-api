@@ -1,7 +1,7 @@
 // src/infra/repositories/prisma-task-repository.ts
 import { PrismaClient } from '@prisma/client';
 import { TaskRepository } from '@domain/repositories';
-import { Task } from '@domain/entities/task';
+import { FindAllTasksParams, Task } from '@domain/entities/task';
 
 export class PrismaTaskRepository implements TaskRepository {
   constructor(private prisma: PrismaClient) {}
@@ -14,13 +14,14 @@ export class PrismaTaskRepository implements TaskRepository {
     });
   }
 
-  async findAllByUser(userId: string): Promise<Task[]> {
+  async findAllByUser(params: FindAllTasksParams): Promise<Task[]> {
     return this.prisma.task.findMany({
       where: {
-        userId,
+        userId: params.userId,
+        ...(params.status && { status: params.status }),
       },
       orderBy: {
-        createdAt: 'desc',
+        [params.orderBy as string]: params.orderDirection,
       },
     });
   }

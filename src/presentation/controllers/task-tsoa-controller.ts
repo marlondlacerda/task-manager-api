@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Body,
   Controller,
@@ -11,6 +12,7 @@ import {
   SuccessResponse,
   Response,
   Path,
+  Query,
 } from 'tsoa';
 import {
   CreateTaskInput,
@@ -78,7 +80,11 @@ export class TaskTsoaController extends Controller {
   })
   @Security('bearerAuth')
   @Get('/')
-  public async findAllByUser(): Promise<SuccessDefaultResponse<Task[]>> {
+  public async findAllByUser(
+    @Query() status?: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED',
+    @Query() orderBy?: 'dueDate' | 'createdAt',
+    @Query() orderDirection?: 'asc' | 'desc',
+  ): Promise<SuccessDefaultResponse<Task[]>> {
     const tasks: Task[] = [
       {
         id: '123e4567-e89b-12d3-a456-426614174000',
@@ -93,9 +99,7 @@ export class TaskTsoaController extends Controller {
 
     return {
       success: true,
-      data: {
-        ...tasks,
-      },
+      data: tasks,
     };
   }
 
@@ -219,7 +223,6 @@ export class TaskTsoaController extends Controller {
   })
   @Security('bearerAuth')
   @Delete('/{id}')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async delete(@Path() id: string): Promise<void> {
     this.setStatus(204);
     return;

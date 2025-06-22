@@ -27,8 +27,15 @@ export class TaskController {
   };
 
   findAllByUser = async (req: Request, res: Response) => {
+    const { status, orderBy, orderDirection } = req.query;
+
     const findTasks = new FindAllTasksByUser(this.taskRepository);
-    const tasks = await findTasks.execute(req.userId as string);
+    const tasks = await findTasks.execute({
+      userId: req.userId as string,
+      status: status as 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | undefined,
+      orderBy: orderBy as 'dueDate' | 'createdAt' | undefined,
+      orderDirection: orderDirection as 'asc' | 'desc' | undefined,
+    });
 
     return HttpHelper.success(res, tasks);
   };
