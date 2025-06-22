@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { TaskRepository } from '@domain/repositories';
 import { HttpHelper } from '@presentation/helpers';
 import { CreateTask, FindAllTasksByUser, FindTaskById } from '@domain/usecases/task';
+import { UpdateTask } from '@domain/usecases/task/update';
 
 export class TaskController {
   constructor(private readonly taskRepository: TaskRepository) {}
@@ -32,6 +33,25 @@ export class TaskController {
 
     const findTask = new FindTaskById(this.taskRepository);
     const task = await findTask.execute(id, req.userId as string);
+
+    return HttpHelper.success(res, task);
+  };
+
+  update = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { title, dueDate, description = null, status } = req.body;
+
+    const updateTask = new UpdateTask(this.taskRepository);
+    const task = await updateTask.execute(
+      id,
+      {
+        title,
+        dueDate: new Date(dueDate),
+        description,
+        status,
+      },
+      req.userId as string,
+    );
 
     return HttpHelper.success(res, task);
   };

@@ -1,6 +1,6 @@
 import { Task } from '@domain/entities';
 import { TaskRepository } from '@domain/repositories';
-import { NotFoundError, BadRequestError } from '@shared/errors/app-error';
+import { NotFoundError, ForbiddenError } from '@shared/errors/app-error';
 
 export class FindTaskById {
   constructor(private readonly taskRepository: TaskRepository) {}
@@ -13,7 +13,7 @@ export class FindTaskById {
     }
 
     if (task.userId !== userId) {
-      throw new BadRequestError('You do not have permission to access this task');
+      throw new ForbiddenError('You do not have permission to access this task');
     }
 
     return task;

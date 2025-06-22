@@ -9,7 +9,7 @@ export const configureTaskRoutes = (router: Router, taskController: TaskControll
   router.post('/', validate(taskSchema), asyncHandler(taskController.create));
   router.get('/', asyncHandler(taskController.findAllByUser));
   router.get('/:id', asyncHandler(taskController.findById));
-  // router.put('/:id', asyncHandler(taskController.update));
+  router.put('/:id', validate(taskSchema), asyncHandler(taskController.update));
   // router.delete('/:id', asyncHandler(taskController.delete));
 
   return router;
