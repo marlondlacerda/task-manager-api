@@ -48,7 +48,7 @@ Desenvolvimento de uma API para controle de tarefas, com autenticação via JWT 
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/marlonlacerda/task-manager-api && cd task-manager-api
+   git clone https://github.com/marlondlacerda/task-manager-api && cd task-manager-api
     ```
 
 2. Copie o arquivo de exemplo e configure as variáveis:
