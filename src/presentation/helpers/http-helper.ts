@@ -15,7 +15,12 @@ export class HttpHelper {
     });
   }
 
-  static error(res: Response, errorMessage: string, statusCode = 500, code = 'INTERNAL_ERROR'): Response {
+  static error(
+    res: Response,
+    errorMessage: string,
+    statusCode = 500,
+    code = 'INTERNAL_ERROR',
+  ): Response {
     return res.status(statusCode).json({
       success: false,
       error: errorMessage,

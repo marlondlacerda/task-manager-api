@@ -1,4 +1,5 @@
-import { AppError } from "./app-error";
+import { logger } from '@shared/logging';
+import { AppError } from './app-error';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -7,19 +8,19 @@ export class ErrorHandler {
     if (error instanceof AppError) {
       return {
         statusCode: error.statusCode,
-        body: { error: error.message, code: error.name }
+        body: { error: error.message, code: error.name },
       };
     }
 
-    console.error('Unexpected error:', error);
+    logger.error('Unexpected error:', error);
 
     return {
       statusCode: 500,
       body: {
         error: 'Internal server error',
         code: 'INTERNAL_ERROR',
-        ...(isProduction ? {} : { stack: (error as Error).stack })
-      }
+        ...(isProduction ? {} : { stack: (error as Error).stack }),
+      },
     };
   }
 }
