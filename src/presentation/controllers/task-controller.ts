@@ -1,8 +1,13 @@
 import { Request, Response } from 'express';
 import { TaskRepository } from '@domain/repositories';
 import { HttpHelper } from '@presentation/helpers';
-import { CreateTask, FindAllTasksByUser, FindTaskById } from '@domain/usecases/task';
-import { UpdateTask } from '@domain/usecases/task/update';
+import {
+  CreateTask,
+  FindAllTasksByUser,
+  FindTaskById,
+  UpdateTask,
+  DeleteTask,
+} from '@domain/usecases/task';
 
 export class TaskController {
   constructor(private readonly taskRepository: TaskRepository) {}
@@ -54,5 +59,14 @@ export class TaskController {
     );
 
     return HttpHelper.success(res, task);
+  };
+
+  delete = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    const deleteTask = new DeleteTask(this.taskRepository);
+    await deleteTask.execute(id, req.userId as string);
+
+    return HttpHelper.noContent(res);
   };
 }
