@@ -19,6 +19,8 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.env .env
+COPY --from=builder /app/src/infra/database/mysql/schema.prisma ./src/infra/database/mysql/schema.prisma
+COPY --from=builder /app/src/infra/database/mysql/migrations ./src/infra/database/mysql/migrations
 
 EXPOSE 3000
 

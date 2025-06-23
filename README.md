@@ -55,21 +55,45 @@ Desenvolvimento de uma API para controle de tarefas, com autenticação via JWT 
     ```bash
    cp .env.example .env
     ```
-
-    Ajuste `.env` se necessário — o padrão está apontando para o MySQL no container de `docker-compose`:
+    Edite o `.env` para refletir o host do seu MySQL. Exemplo de configuração para MySQL local:
     ```env
-    DATABASE_URL="mysql://root:root@db:3306/taskmanager"
+    DATABASE_URL="mysql://root:root@localhost:3306/taskmanager"
     JWT_SECRET=default_secret
     PORT=3000
     NODE_ENV=development
     ```
+    📌 Se você usar Docker para o banco, use `172.17.0.1` no lugar de `localhost`, no DATABASE_URL, para o app conseguir enxergar o banco de fora do container.
 
-3. Inicie os containers com Docker Compose:
+3. Suba um banco MySQL
+
+    Você pode usar o MySQL localmente ou rodar um container com Docker:
+    ```bash
+   docker run --name mysql-taskmanager -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=taskmanager -p 3306:3306 -d mysql:8
+    ```
+    ⚠️ Atenção: o MySQL precisa estar rodando antes de subir o app — o Prisma vai tentar aplicar as migrations na inicialização. Se o banco não estiver acessível, o container do app irá falhar.
+
+4. Construa e execute o app com Docker
    ```bash
-   docker-compose up -d
+   docker build -t taskmanager-app . \
+   && docker run -d --name taskmanager-container \
+   --env-file .env \
+   -p 3000:3000 \
+   taskmanager-app
    ```
 
-4. Acesso Swagger UI:
+5. Aplique as migrations do Prisma:
+
+    Se você estiver rodando o app via Docker, execute o comando abaixo para aplicar as migrations:
+    ```bash
+   docker exec -it taskmanager-container sh -c "export DATABASE_URL='mysql://root:root@172.17.0.1:3306/taskmanager' && npm run prisma:migrate"
+    ```
+    Se estiver rodando localmente, use:
+    ```bash
+    npm run prisma:migrate
+    ```
+    ⚠️ Atenção: Certifique-se de estar usando o mesmo `DATABASE_URL` que você configurou no `.env` com o host correto do MySQL.
+
+6. Acesso Swagger UI:
 
     🚀 Quando tudo estiver no ar, acesse:
     ```bash
@@ -134,14 +158,11 @@ src
 - TSOA + Swagger UI
 - Docker + Docker Compose
 - JWT, bcrypt, helmet, winston, zod, entre outros.
-
 ___
 
 ## 🧪 Testes
-
-Ainda não foram implementados testes automatizados devido à falta de tempo. No entanto, a estrutura do projeto foi planejada para facilitar a adição de testes unitários e de integração no futuro. Recomenda-se o uso de bibliotecas como Jest ou Mocha para testes unitários e Supertest para testes de integração com as rotas da API.
-
----
+Devido à limitação de tempo, foram implementados testes básicos utilizando Jest. Os testes cobrem as principais funcionalidades da API, como autenticação e operações CRUD de tarefas. 
+___
 
 ## 📬 Contato
 
