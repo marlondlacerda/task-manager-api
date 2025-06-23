@@ -9,6 +9,7 @@
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "isolatedModules": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "baseUrl": "./src",
@@ -19,7 +20,7 @@
       "@presentation/*": ["presentation/*"],
       "@shared/*": ["shared/*"]
     },
-    "types": ["node"],
+    "types": ["node", "jest"],
     "typeRoots": ["node_modules/@types", "src/@types"]
   },
   "include": ["src/**/*"],
