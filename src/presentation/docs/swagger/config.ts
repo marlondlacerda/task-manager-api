@@ -1,6 +1,6 @@
 import { Express } from 'express';
 import swaggerUi from 'swagger-ui-express';
-import * as swaggerDocument from '../../../../build/swagger.json';
+import * as swaggerDocument from '../../../../dist/swagger.json';
 
 export const setupSwagger = (app: Express) => {
   if (process.env.NODE_ENV !== 'production') {

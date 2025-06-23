@@ -11,12 +11,14 @@ export const setupRoutes = () => {
   configureHealthcheck(router);
 
   // Configure authentication routes
-  configureAuthRoutes(router, makeAuthController());
+  const authRouter = Router();
+  router.use('/auth', authRouter);
+  configureAuthRoutes(authRouter, makeAuthController());
 
   // Configure task routes
   const tasksRouter = Router();
-  configureTaskRoutes(tasksRouter, makeTaskController());
   router.use('/tasks', tasksRouter);
+  configureTaskRoutes(tasksRouter, makeTaskController());
 
   router.use((req: Request, res: Response) => {
     res.status(404).json({

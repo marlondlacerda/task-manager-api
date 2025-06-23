@@ -1,5 +1,5 @@
 import { Controller, Route, Tags, Post, Body, SuccessResponse, Response, Example } from 'tsoa';
-import {
+import type {
   RegisterInput,
   LoginInput,
   AuthResponse,
@@ -7,7 +7,7 @@ import {
   SuccessDefaultResponse,
 } from '../docs/schemas';
 
-@Route()
+@Route('/auth')
 @Tags('Authentication')
 export class AuthTsoaController extends Controller {
   /**

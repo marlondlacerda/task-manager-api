@@ -14,7 +14,7 @@ import {
   Path,
   Query,
 } from 'tsoa';
-import {
+import type {
   CreateTaskInput,
   UpdateTaskInput,
   DefaultErrorResponse,

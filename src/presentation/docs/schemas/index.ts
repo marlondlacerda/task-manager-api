@@ -1,4 +1,4 @@
-export { DefaultErrorResponse, ValidationErrorDetail } from './error.schema';
-export { UpdateTaskInput, CreateTaskInput } from './task.schema';
-export { SuccessDefaultResponse } from './success.schema';
-export { RegisterInput, LoginInput, AuthResponse } from './auth.schema';
+export type { DefaultErrorResponse, ValidationErrorDetail } from './error.schema';
+export type { UpdateTaskInput, CreateTaskInput } from './task.schema';
+export type { SuccessDefaultResponse } from './success.schema';
+export type { RegisterInput, LoginInput, AuthResponse } from './auth.schema';

@@ -6,7 +6,7 @@
   ],
   "noImplicitAdditionalProperties": "throw-on-extras",
   "spec": {
-    "outputDirectory": "build",
+    "outputDirectory": "dist",
     "specVersion": 3,
     "basePath": "/",
     "securityDefinitions": {
@@ -18,6 +18,6 @@
     }
   },
   "routes": {
-    "routesDir": "build"
+    "routesDir": "dist"
   }
 }

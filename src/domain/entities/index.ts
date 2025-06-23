@@ -1,2 +1,2 @@
-export { User } from './user';
-export { Task, FindAllTasksParams } from './task';
+export type { User } from './user';
+export type { Task, FindAllTasksParams } from './task';
