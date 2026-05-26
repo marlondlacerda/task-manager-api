@@ -10,14 +10,14 @@ import { setupSwagger } from '@presentation/docs/swagger/config';
 
 const app = express();
 
-app.use(express.json({ limit: '10kb' }));
-app.use(helmet());
-app.use(
-  cors({
-    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
-    credentials: true,
-  }),
-);
+//app.use(express.json({ limit: '10kb' }));
+//app.use(helmet());
+//app.use(
+//  cors({
+//    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
+//    credentials: true,
+//  }),
+//);
 
 app.use(loggingMiddleware);
 setupSwagger(app);
